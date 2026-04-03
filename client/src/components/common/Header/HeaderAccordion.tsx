@@ -1,29 +1,30 @@
-import {
-  IonAccordion,
-  IonAccordionGroup,
-  IonItem,
-  IonLabel,
-  IonModal,
-  IonContent
-} from "@ionic/react";
-import { useRef, useState } from "react";
+import {IonAccordion, IonAccordionGroup, IonItem, IonLabel, IonModal, IonContent, IonCard, IonCardContent} from "@ionic/react";
+import { useEffect, useRef, useState } from "react";
+
 import InvestmentChart from "../InvestmentChart/InvestmentChart";
+import useTypedSelector from "../../../hooks/useTypedSelector";
+import useActions from "../../../hooks/usaActions";
 
 interface HeaderAccordionProps {
   total: number;
   invested: number;
-  history: number[];
 }
 
 const HeaderAccordion: React.FC<HeaderAccordionProps> = ({
   total,
   invested,
-  history
 }) => {
+
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
+  const { chart } = useTypedSelector(state => state.chart);
+  const { loadChart } = useActions();
 
   const profit = total - invested;
+
+  useEffect(() => {
+    loadChart("AAPL")
+  }, [])
 
   return (
     <>
@@ -55,9 +56,19 @@ const HeaderAccordion: React.FC<HeaderAccordionProps> = ({
 
           <h2 style={{ marginTop: 0 }}>Szczegóły inwestycji</h2>
 
-          <div style={{ marginBottom: "20px" }}>
-            <InvestmentChart history={history} />
-          </div>
+          {/* <div style={{ marginBottom: "20px" }}>
+            <InvestmentChart data={history} />
+          </div> */}
+
+          {
+            chart?.length > 0 && (
+              <IonCard>
+                <IonCardContent>
+                  <InvestmentChart data={chart} />
+                </IonCardContent>
+              </IonCard>
+            )
+          }
 
           <div style={{ fontSize: "18px", marginBottom: "10px" }}>
             Zainwestowano: <b>{invested.toLocaleString()} zł</b>

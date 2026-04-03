@@ -4,20 +4,24 @@
   padding: 4px 0;
 }
 
-.stock-item {
+/* Każdy wiersz jako flex */
+.row {
+  display: flex;
+  align-items: center;
   --background: transparent;
-  --color: #fff;
+  color: #fff;
+  padding: 10px 14px;
   font-family: "Roboto Mono", monospace;
-  padding: 8px 12px;
 }
 
-.stock-ticker {
-  font-size: 16px;
+/* Pierwsza kolumna — zawsze po lewej */
+.colLeft {
+  flex: 1;
   font-weight: 600;
 }
 
-.stock-price {
-  font-size: 15px;
-  padding: 6px 10px;
-  border-radius: 6px;
+/* Pozostałe kolumny — po prawej */
+.colRight {
+  width: 90px;        /* możesz zmienić na 80–110px */
+  text-align: right;
 }

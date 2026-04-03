@@ -15,16 +15,15 @@ export const marketError = (payload: any) => ({
   payload
 });
 
-export const loadMarkets = () => async (dispatch: any) => {
+export const loadMarkets = (symbols: string[]) => async (dispatch: any) => {
   try {
     await dispatch(marketLoading());
 
-    const symbols = ["AAPL", "MSFT", "TSLA", "NVDA", "AMZN"];
     const payload = await MarketService.getInstance().loadMarkets(symbols);
 
     dispatch(marketSuccess(payload));
 
-  } catch (err) {
+  } catch (err) { 
     dispatch(marketError(err));
   }
 };

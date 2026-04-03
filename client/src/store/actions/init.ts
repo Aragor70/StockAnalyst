@@ -1,10 +1,11 @@
 import { LanguageActionsEnum } from "../../enums/language";
 
 import LanguageService from "../../services/languageService";
+import { defaultLanguage } from "../../shared/common";
 
 export const init = () => async (dispatch: any) =>{
 
-    return await dispatch(setLanguage("en"));
+    return await dispatch(setLanguage(defaultLanguage));
 }
 
 const setLanguage = (languageCode: string) => async (dispatch: any) => {

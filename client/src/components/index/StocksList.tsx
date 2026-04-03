@@ -1,5 +1,4 @@
 import { IonList, IonItem, IonLabel, IonBadge } from "@ionic/react";
-
 import styles from "./StocksList.module.scss";
 
 interface Stock {
@@ -8,23 +7,35 @@ interface Stock {
   change?: number;
 }
 
-const StocksList: React.FC<{ data: Stock[] }> = ({ data }) => {
+const StocksList: React.FC<{ positions: Stock[]; wallet: any }> = ({ positions, wallet }) => {
   return (
     <IonList className={styles["stocks-list"]}>
-      {data.map((s) => {
-        const badgeColor =
-          s.change && s.change > 0
-            ? "success"
-            : s.change && s.change < 0
-            ? "danger"
-            : "medium";
+
+      {/* HEADER */}
+      <IonItem lines="none" className={styles.row}>
+        <div className={styles.colLeft}>Symbol</div>
+        <div className={styles.colRight}>Price</div>
+        <div className={styles.colRight}>Owned</div>
+      </IonItem>
+
+      {positions.map((s) => {
+        const owned = wallet.positions.find((p: any) => p.symbol === s.symbol);
 
         return (
-          <IonItem key={s.symbol} lines="full" className={styles["stock-item"]}>
-            <IonLabel className={styles["stock-ticker"]}>{s.symbol}</IonLabel>
-            <IonBadge color={badgeColor} className={styles["stock-price"]}>
-              {s.price.toFixed(2)}
-            </IonBadge>
+          <IonItem key={s.symbol} lines="full" className={styles.row}>
+            <div className={styles.colLeft}>{s.symbol}</div>
+
+            <div className={styles.colRight}>
+              <IonBadge color="medium">{s.price.toFixed(2)}</IonBadge>
+            </div>
+
+            <div className={styles.colRight}>
+              {owned ? (
+                <IonBadge color="success">{owned.amount}x</IonBadge>
+              ) : (
+                <IonBadge color="medium">–</IonBadge>
+              )}
+            </div>
           </IonItem>
         );
       })}

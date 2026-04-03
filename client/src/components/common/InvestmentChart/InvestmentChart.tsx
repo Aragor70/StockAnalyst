@@ -11,24 +11,33 @@ import {
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Filler);
 
-interface InvestmentChartProps {
-  history: number[]; // np. [10000, 10500, 11000, 11500, 12000, 12450]
+export interface ChartPoint {
+  timestamp: number;
+  price: number;
 }
 
-const InvestmentChart: React.FC<InvestmentChartProps> = ({ history }) => {
-  const labels = ["1", "2", "3", "4", "5", "6"]; // miesiące / okresy
+const InvestmentChart: React.FC<{ data: ChartPoint[] }> = ({ data }) => {
 
-  const data = {
+  const labels = data.map((p) =>
+    new Date(p.timestamp).toLocaleTimeString("pl-PL", {
+      hour: "2-digit",
+      minute: "2-digit"
+    })
+  );
+
+  const values = data.map((p) => p.price);
+
+  const chartData = {
     labels,
     datasets: [
       {
-        label: "Wartość inwestycji",
-        data: history,
+        label: "Price",
+        data: values,
         borderColor: "#4CAF50",
         backgroundColor: "rgba(76, 175, 80, 0.2)",
         fill: true,
         tension: 0.3,
-        pointRadius: 3
+        pointRadius: 0
       }
     ]
   };
@@ -39,11 +48,18 @@ const InvestmentChart: React.FC<InvestmentChartProps> = ({ history }) => {
       legend: { display: false }
     },
     scales: {
-      y: { beginAtZero: false }
+      x: {
+        ticks: { display: false },
+        grid: { display: false }
+      },
+      y: {
+        ticks: { display: false },
+        grid: { display: false }
+      }
     }
   };
 
-  return <Line data={data} options={options} />;
+  return <Line data={chartData} options={options} />;
 };
 
 export default InvestmentChart;

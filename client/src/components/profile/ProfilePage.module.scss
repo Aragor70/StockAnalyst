@@ -1,0 +1,75 @@
+.content {
+  --background: #000;
+  color: #fff;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 10px auto;
+  border: 3px solid #444;
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 22px;
+  font-weight: 700;
+  display: block;
+  margin-top: 8px;
+}
+
+.email {
+  font-size: 14px;
+  opacity: 0.7;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.statsCard {
+  background: #111;
+  border-radius: 12px;
+}
+
+.statsRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.statBox {
+  text-align: center;
+  flex: 1;
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: 700;
+  display: block;
+}
+
+.statLabel {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.list {
+  margin-top: 20px;
+  background: #111;
+  border-radius: 12px;
+}
+
+.listItem {
+  --background: transparent;
+  --color: #fff;
+  font-size: 16px;
+}
+
+.logout {
+  margin-top: 30px;
+}

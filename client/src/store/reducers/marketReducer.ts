@@ -9,9 +9,9 @@ export interface MarketState {
 
 export const initialState: MarketState = {
   position: null,
+  positions: [],
   loading: true,
   errors: {},
-  positions: [],
 };
 
 const marketReducer = (

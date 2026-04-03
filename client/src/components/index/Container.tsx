@@ -11,11 +11,11 @@ interface ContainerProps {
 const IndexContainer: React.FC<ContainerProps> = ({ name }) => {
 
   const positions = useTypedSelector(state => state.market.positions);
+  const wallet = useTypedSelector(state => state.wallet);
 
   return (
     <Container>
-        
-        <StocksList data={positions} />
+        <StocksList positions={positions} wallet={wallet} />
     </Container>
   );
 };

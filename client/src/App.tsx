@@ -46,6 +46,8 @@ import './styles/global.scss';
 import { TabEnum } from './enums/common';
 import Tab1 from './pages/Tab1';
 import LanguageService from './services/languageService';
+import ProfilePage from './pages/ProfilePage';
+import SinglePage from './pages/SinglePage';
 
 const languageService = new LanguageService();
 
@@ -62,11 +64,18 @@ const App: React.FC = () => {
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route exact path="/tab1">
+            <Route exact path="/main">
               <Tab1 />
             </Route>
+            <Route exact path="/profile">
+              <ProfilePage />
+            </Route>
+            <Route exact path="/single/:symbol">
+              <SinglePage />
+            </Route>
+            
             <Route exact path="/">
-              <Redirect to="/tab1" />
+              <Redirect to="/main" />
             </Route>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
@@ -74,7 +83,7 @@ const App: React.FC = () => {
               Object.values(TabEnum).map(element => (
                 <IonTabButton key={element} tab={element} href={`/${element}`}>
                   <IonIcon aria-hidden="true" icon={triangle} />
-                  <IonLabel></IonLabel>
+                  <IonLabel>{element}</IonLabel>
                 </IonTabButton>
               ))
             }

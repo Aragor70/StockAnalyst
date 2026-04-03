@@ -5,11 +5,11 @@ import useActions from '../hooks/usaActions';
 
 const Tab1: React.FC = () => {
 
-  const { loadMarkets, init } = useActions();
+  const { loadMarkets, getWallet, init } = useActions();
 
   useEffect(() => {
     
-    loadMarkets();
+    getWallet();
     init();
 
     return () => {

@@ -1,0 +1,83 @@
+.content {
+  --background: #000;
+  color: #fff;
+  padding: 16px;
+}
+
+.card {
+  background: #111;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+/* PRICE */
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.change {
+  font-size: 14px;
+  padding: 6px 10px;
+}
+
+/* CHART */
+.chart {
+  height: 200px;
+  background: #222;
+  border-radius: 8px;
+  position: relative;
+}
+
+.chartPlaceholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.5;
+}
+
+/* OWNED */
+.ownedRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ownedLabel {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ownedProfit {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+/* COMPANY INFO */
+.companyTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.companyField {
+  margin-bottom: 6px;
+  font-size: 14px;
+
+  span {
+    color: #ccc;
+  }
+
+  a {
+    color: #4da3ff;
+  }
+}
