@@ -46,22 +46,22 @@ class WalletService extends BaseService {
     }
   }
 
-  async loadSummary(): Promise<WalletSummary | null> {
-    try {
-      const res = await this.get("/api/wallet/get-summary");
+  // async loadSummary(): Promise<WalletSummary | null> {
+  //   try {
+  //     const res = await this.get("/api/wallet/get-summary");
 
-      if (!res) return null;
+  //     if (!res) return null;
 
-      return {
-        total: res.total,
-        invested: res.invested,
-        profit: res.profit,
-      };
-    } catch (err) {
-      console.error("Failed to load wallet summary:", err);
-      return null;
-    }
-  }
+  //     return {
+  //       total: res.total,
+  //       invested: res.invested,
+  //       profit: res.profit,
+  //     };
+  //   } catch (err) {
+  //     console.error("Failed to load wallet summary:", err);
+  //     return null;
+  //   }
+  // }
 
   async addPosition(position: WalletPosition): Promise<boolean> {
     try {

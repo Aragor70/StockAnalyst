@@ -1,21 +1,35 @@
 import { SummaryActionsEnum } from "../../enums/summary";
 
+export interface CompanySummary {
+  longName: string;
+  sector: string;
+  industry: string;
+  marketCap: number;
+  website: string;
+}
+
+export interface CompanyMore {
+  address: string;
+  employees: number;
+  description: string;
+}
+
 export interface SummaryState {
   loading: boolean;
+  moreLoading: boolean;
+  summary: CompanySummary | null;
+  more: CompanyMore | null;
+  moreError: any;
   error: any;
-  summary: any | null;
-  profileLoading: boolean;
-  profileError: any;
-  profile: any | null;
 }
 
 export const initialState: SummaryState = {
   loading: false,
   error: null,
   summary: null,
-  profileLoading: false,
-  profileError: null,
-  profile: null,
+  moreLoading: false,
+  moreError: null,
+  more: null,
 };
 
 const summaryReducer = (
@@ -27,19 +41,19 @@ const summaryReducer = (
       return { ...state, loading: true };
 
     case SummaryActionsEnum.Summary_Success:
-      return { ...state, loading: false, summary: action.payload };
+      return { ...state, loading: false, summary: action.payload.summary, more: action.payload.more };
 
     case SummaryActionsEnum.Summary_Error:
       return { ...state, loading: false, error: action.payload };
 
     case SummaryActionsEnum.More_Loading:
-      return { ...state, profileLoading: true };
+      return { ...state, moreLoading: true };
 
     case SummaryActionsEnum.More_Success:
-      return { ...state, profileLoading: false, profile: action.payload };
+      return { ...state, moreLoading: false, more: action.payload };
 
     case SummaryActionsEnum.More_Error:
-      return { ...state, profileLoading: false, profileError: action.payload };
+      return { ...state, moreLoading: false, moreError: action.payload };
 
     default:
       return state;

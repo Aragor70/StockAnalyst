@@ -1,23 +1,5 @@
-import {
-  IonPage,
-  IonContent,
-  IonAvatar,
-  IonText,
-  IonCard,
-  IonCardContent,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonIcon,
-  IonButton
-} from "@ionic/react";
-
-import {
-  settingsOutline,
-  lockClosedOutline,
-  logOutOutline,
-  walletOutline
-} from "ionicons/icons";
+import { IonPage, IonContent, IonAvatar, IonText, IonCard, IonCardContent, IonList, IonItem, IonLabel, IonIcon, IonButton } from "@ionic/react";
+import { settingsOutline, lockClosedOutline, logOutOutline, walletOutline } from "ionicons/icons";
 
 import styles from "./ProfilePage.module.scss";
 

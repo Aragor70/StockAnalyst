@@ -1,4 +1,6 @@
 import { IonList, IonItem, IonLabel, IonBadge } from "@ionic/react";
+import { useHistory } from "react-router";
+
 import styles from "./StocksList.module.scss";
 
 interface Stock {
@@ -8,6 +10,9 @@ interface Stock {
 }
 
 const StocksList: React.FC<{ positions: Stock[]; wallet: any }> = ({ positions, wallet }) => {
+
+  const history = useHistory();
+  
   return (
     <IonList className={styles["stocks-list"]}>
 
@@ -18,15 +23,15 @@ const StocksList: React.FC<{ positions: Stock[]; wallet: any }> = ({ positions, 
         <div className={styles.colRight}>Owned</div>
       </IonItem>
 
-      {positions.map((s) => {
-        const owned = wallet.positions.find((p: any) => p.symbol === s.symbol);
+      {positions.map((element) => {
+        const owned = wallet.positions.find((p: any) => p.symbol === element.symbol);
 
         return (
-          <IonItem key={s.symbol} lines="full" className={styles.row}>
-            <div className={styles.colLeft}>{s.symbol}</div>
+          <IonItem key={element.symbol} lines="full" className={styles.row} onClick={() => history.push(`/single/${element.symbol}`)}>
+            <div className={styles.colLeft}>{element.symbol}</div>
 
             <div className={styles.colRight}>
-              <IonBadge color="medium">{s.price.toFixed(2)}</IonBadge>
+              <IonBadge color="medium">{element.price.toFixed(2)}</IonBadge>
             </div>
 
             <div className={styles.colRight}>

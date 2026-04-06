@@ -45,18 +45,18 @@ import './styles/global.scss';
 
 import { TabEnum } from './enums/common';
 import Tab1 from './pages/Tab1';
-import LanguageService from './services/languageService';
 import ProfilePage from './pages/ProfilePage';
 import SinglePage from './pages/SinglePage';
-
-const languageService = new LanguageService();
+import useActions from './hooks/usaActions';
 
 setupIonicReact();
 
 const App: React.FC = () => {
 
+  const init = useActions().init
+
   useEffect(() => {
-    languageService.getLanguage("en")
+    init()
   }, [])
 
   return (

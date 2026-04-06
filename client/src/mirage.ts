@@ -22,10 +22,12 @@ export function makeServer() {
       // MARKET QUOTES (loadMarkets)
       // ---------------------------------------------
       this.get("/market/get-quotes", (_schema, request) => {
+
+        console.log("Received symbols:", request.queryParams.symbols);
         const raw = request.queryParams.symbols ?? ["AAPL"];
         const symbols = Array.isArray(raw) ? raw : raw.split(",");
 
-        const quotes = symbols.map((symbol) => {
+        const positions = symbols.map((symbol) => {
           const price = Number((Math.random() * 200 + 50).toFixed(2));
           const change = Number((Math.random() * 4 - 2).toFixed(2));
           const percent = Number(((change / price) * 100).toFixed(2));
@@ -40,7 +42,7 @@ export function makeServer() {
           };
         });
 
-        return { quotes };
+        return { positions };
       });
 
       // ---------------------------------------------
@@ -55,37 +57,6 @@ export function makeServer() {
         }));
 
         return { symbol, chart: points.reverse() };
-      });
-
-      // ---------------------------------------------
-      // COMPANY SUMMARY (loadSummary)
-      // ---------------------------------------------
-      this.get("/get-summary", (_schema, request) => {
-        const symbol = request.queryParams.symbol || "AAPL";
-
-        return {
-          symbol,
-          longName: "Apple Inc.",
-          sector: "Technology",
-          industry: "Consumer Electronics",
-          marketCap: 2_500_000_000_000,
-          website: "https://apple.com",
-        };
-      });
-
-      // ---------------------------------------------
-      // ASSET PROFILE (loadAssetProfile)
-      // ---------------------------------------------
-      this.get("/get-asset-profile", (_schema, request) => {
-        const symbol = request.queryParams.symbol || "AAPL";
-
-        return {
-          symbol,
-          address: "1 Apple Park Way, Cupertino, CA",
-          employees: 164000,
-          description:
-            "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories.",
-        };
       });
 
       // ---------------------------------------------

@@ -21,15 +21,17 @@ class MarketService extends BaseService {
   // ───────────────────────────────────────────────
   // 1) QUOTES (cena, zmiana, procent)
   // ───────────────────────────────────────────────
-  async loadMarkets(symbols: string[]): Promise<MarketInfo[]> {
+  async loadMarkets(symbols?: string | string[]): Promise<MarketInfo[]> {
     try {
+      console.log("Loading market data for symbols:", symbols);
       const res = await this.get("/api/market/get-quotes", {
-        params: {
-          symbols: symbols.join(","),
-        },
+          symbols: symbols ? Array.isArray(symbols)
+            ? symbols.join(",")
+            : symbols
+            : undefined,
       });
 
-      const results = res?.quotes || [];
+      const results = res?.positions || [];
 
       return results.map((item: any) => ({
         symbol: item.symbol,
@@ -38,6 +40,7 @@ class MarketService extends BaseService {
         percent: item.regularMarketChangePercent,
         currency: item.currency,
       }));
+
     } catch (err) {
       console.error("Failed to load market data:", err);
       return [];
@@ -66,7 +69,7 @@ class MarketService extends BaseService {
   async loadSummary(symbol: string): Promise<any> {
     try {
       const res = await this.get("/api/get-summary", {
-        params: { symbol },
+        symbol
       });
 
       return res || null;

@@ -5,18 +5,13 @@ import useActions from '../hooks/usaActions';
 
 const Tab1: React.FC = () => {
 
-  const { loadMarkets, getWallet, init } = useActions();
+  const { loadMarkets, getWallet } = useActions();
 
   useEffect(() => {
-    
+    loadMarkets(["AAPL", "MSFT", "TSLA", "NVDA", "AMZN"]);
     getWallet();
-    init();
-
-    return () => {
-      console.log("unload markets")
-    }
-  }, [])
-
+  }, []);
+  
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <IndexPresentation /> 
